@@ -1,5 +1,5 @@
 /*
- * Cave Crawle Library header
+ * Cave Crawler Library header
  *
  * Copyright 2019 (C) Bartosz Meglicki <meglickib@gmail.com>
  *

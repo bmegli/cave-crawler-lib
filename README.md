@@ -14,7 +14,7 @@ Library was written for [cave-crawler-mcu](https://github.com/bmegli/cave-crawle
 
 Library was designed to retrieve readings history (not only the latest reading).
 
-Library [documentation](TODO)
+Library [documentation](https://bmegli.github.io/cave-crawler-lib/)
 
 ## Building Instructions
 
@@ -49,7 +49,7 @@ Plug [cave-crawler-mcu]((https://github.com/bmegli/cave-crawler-mcu)) and run `c
 
 See examples directory for more complete examples with error handling. (TODO)
 
-Library [documentation](TO DO).
+Library [documentation](https://bmegli.github.io/cave-crawler-lib/).
 
 
 ```C

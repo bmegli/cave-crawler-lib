@@ -170,6 +170,8 @@ struct cc *cc_init(const char *tty);
  */
 int cc_close(struct cc *c);
 
+///@}
+
 /**
  * @brief Read multiple types of data simultanously.
  *

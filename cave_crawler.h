@@ -191,7 +191,6 @@ int cc_close(struct cc *c);
  * - CC_DATA_PENDING indicates at least one array in \p data parameter was filled completely and more data is pending (without blocking)
  * - CC_ERROR indicates error, query errno for the details
  *
- * @see cc_odometry, cc_rplidar, cc_xv11lidar
  */
 int cc_read_all(struct cc *c, struct cc_data *data);
 

@@ -30,11 +30,11 @@ sudo apt-get install libcurl4 cmake
 git clone https://github.com/bmegli/cave-crawler-lib
 
 # finally build the library and examples
-# cd cave-crawler-lib
-# mkdir build
-# cd build
-# cmake
-# make
+cd cave-crawler-lib
+mkdir build
+cd build
+cmake
+make
 ```
 
 ## Testing

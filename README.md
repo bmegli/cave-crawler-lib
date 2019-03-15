@@ -23,20 +23,23 @@ Library [documentation](TODO)
 sudo apt-get update
 sudo apt-get install build-essential git
 
+# get cmake - we need to specify libcurl4 for Ubuntu 18.04 dependencies problem
+sudo apt-get install libcurl4 cmake
+
 # clone the repository
 git clone https://github.com/bmegli/cave-crawler-lib
 
-# TO DO
-# build the examples
+# finally build the library and examples
 # cd cave-crawler-lib
-# make all
+# mkdir build
+# cd build
+# cmake
+# make
 ```
 
 ## Testing
 
-TO DO (no `cc-read-all` yet)
-
-Run `cc-read-all` with your device, e.g.: 
+Plug [cave-crawler-mcu]((https://github.com/bmegli/cave-crawler-mcu)) and run `cc-read-all` with your device, e.g.: 
 
 ```bash
 ./cc-read-all /dev/ttyACM0
@@ -92,7 +95,17 @@ Library [documentation](TO DO).
 	cc_close(c);
 ```
 
-### Compiling your code
+## Compiling your code
+
+### IDE (recommended)
+
+Simply copy `cave_crawler.h` and `cave_crawler.c` to your project.
+
+### CMake
+
+Hopefully you know what you are doing.
+
+### Manually
 
 C
 ``` bash

@@ -22,9 +22,6 @@
 #include <endian.h> //htobe32, be32toh
 #include <time.h> //time, difftime
 
-//temp
-//#include <stdio.h>
-
 /* TUNABLE CONSTANTS */
 enum {CC_BUFFER_SIZE=2048};
 

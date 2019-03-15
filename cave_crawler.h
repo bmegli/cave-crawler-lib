@@ -49,12 +49,18 @@ struct cc;
  */
 struct cc_odometry_data
 {
-	uint32_t timestamp_us;
-	int32_t left_encoder_counts;
-	int32_t right_encoder_counts;
-	float qw,qx,qy,qz; //orientation quaternion
+	uint32_t timestamp_us; //!< microseconds elapsed since MCU was plugged in
+	int32_t left_encoder_counts; //!< left wheel encoder counts
+	int32_t right_encoder_counts; //!< right wheel encoder counts
+	float qw; //!< orientation quaternion w
+	float qx; //!< orientation quaternion x
+	float qy; //!< orientation quaternion y
+	float qz; //!< orientation quaternion z
 };
 
+/***
+	* @brief the size of RPLidar internal data
+	*/
 enum {RPLidarPacketDataSize=132};
 
 /**
@@ -64,9 +70,9 @@ enum {RPLidarPacketDataSize=132};
  */
 struct cc_rplidar_data
 {
-	uint32_t timestamp_us; //timestamp in microseconds
-	uint8_t sequence;		 //0-255, wrap-around for checking if packets are consecutive
-	uint8_t data[RPLidarPacketDataSize]; //raw measurement packet data
+	uint32_t timestamp_us; //!< microseconds elapsed since MCU was plugged in
+	uint8_t sequence;		 //!< 0-255, wrap-around for checking if packets are consecutive
+	uint8_t data[RPLidarPacketDataSize]; //!< raw rplidar_response_ultra_capsule_measurement_nodes_t
 };
 
 /**
@@ -76,10 +82,10 @@ struct cc_rplidar_data
  */
 struct cc_xv11lidar_data
 {
-	uint32_t timestamp_us;
-	uint8_t angle_quad; //0-89 for readings 0-3 356-359
-	uint16_t speed64;	//divide by 64 for speed in rpm
-	uint16_t distances[4]; //flags and distance or error code
+	uint32_t timestamp_us; //!< microseconds elapsed since MCU was plugged in
+	uint8_t angle_quad; //!< 0-89 for readings 0-3 356-359
+	uint16_t speed64;	//!< divide by 64 for speed in rpm
+	uint16_t distances[4]; //!< flags and distance or error code
 };
 
 /**
@@ -112,7 +118,7 @@ struct cc_data
 	struct cc_size size; //array sizes
 };
 
-/**
+/***
 	* @brief Constants returned by most of library functions
 	*/
 enum cc_retval_enum {

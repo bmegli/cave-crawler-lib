@@ -160,51 +160,6 @@ struct cc *cc_init(const char *tty);
  */
 int cc_close(struct cc *c);
 
-///@}
-
-/** @name Convinient read
- *	Simplified read functions for single type of data (e.g. only odometry).
- *	If you need to read multiple types of data use \p cc_read_all instead.
- *
- *	Functions will block waiting for data unless last call returned value > \p size.
- *	Timeout with return value CC_ERROR and errno EAGAIN indicates device is not sending data type for some reason.
- *
- *	Other data types are discarded silently without parsing.
- *
- * @param c pointer to internal library data
- * @param data user supplied array
- * @param size user supplied array size
- * @return
- * - value > \p size indicates user array was filled and more data is pending (without blocking)
- * - value <= \p size indicates number of data points returned in array (next call will block)
- * - CC_ERROR indicates error, query errno for the details
- *
- * @see cc_read_all
- *
- * Example:
- * @code
- * int status, i;
- * struct cc_odometry_data odo[10];
- *
- * while( (status=cc_odometry(c, odo, 10)) != CC_ERROR	)
- * {
- *	for(i=0; i<status && i<10; ++i)
- *		 printf("[%lu ms] left=%d right=%d qw=%f qx=%f qy=%f qz=%f\n",
- *		 odo[i].timestamp_us,
- *		 odo[i].left_encoder_counts, odo[i].right_encoder_counts,
- *		 odo[i].qw, odo[i].qx, odo[i].qy, odo[i].qz)
- * }
- * @endcode
- */
-///@{
-/** @brief Read only odometry data. */
-int cc_odometry(struct cc *c, struct cc_odometry_data *data, int size);
-/** @brief Read only RPLidar A3 data */
-int cc_rplidar(struct cc *c, struct cc_rplidar_data *data, int size);
-/** @brief Read only XV11 lidar data. */
-int cc_xv11lidar(struct cc *c, struct cc_xv11lidar_data *data, int size);
-///@}
-
 /**
  * @brief Read multiple types of data simultanously.
  *

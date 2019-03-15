@@ -243,57 +243,6 @@ static struct cc *close_free_and_return_null(struct cc *c)
 
 /* Data reading functions */
 
-int cc_odometry(struct cc *c, struct cc_odometry_data *data, int size)
-{
-	int ret;
-
-	struct cc_data cdata = {0};
-	cdata.odometry=data;
-	cdata.size.odometry=size;
-
-	if( (ret=cc_read_all(c, &cdata)) == CC_ERROR )
-		return CC_ERROR;
-
-	if(ret == CC_DATA_PENDING)
-		return size+1;
-
-	return cdata.size.odometry;
-}
-
-int cc_rplidar(struct cc *c, struct cc_rplidar_data *data, int size)
-{
-	int ret;
-
-	struct cc_data cdata = {0};
-	cdata.rplidar=data;
-	cdata.size.rplidar=size;
-
-	if( (ret=cc_read_all(c, &cdata)) == CC_ERROR )
-		return CC_ERROR;
-
-	if(ret == CC_DATA_PENDING)
-		return size+1;
-
-	return cdata.size.rplidar;
-}
-
-int cc_xv11lidar(struct cc *c, struct cc_xv11lidar_data *data, int size)
-{
-	int ret;
-
-	struct cc_data cdata = {0};
-	cdata.xv11lidar=data;
-	cdata.size.xv11lidar=size;
-
-	if( (ret=cc_read_all(c, &cdata)) == CC_ERROR )
-		return CC_ERROR;
-
-	if(ret == CC_DATA_PENDING)
-		return size+1;
-
-	return cdata.size.xv11lidar;
-}
-
 int cc_read_all(struct cc* c, struct cc_data *data)
 {
 	int valid, msg_process_status=CC_MESSAGE_PROCESSED, offset=0;

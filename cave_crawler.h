@@ -127,6 +127,10 @@ enum cc_retval_enum {
 
 /**
  * @brief initialize internal library data.
+ *
+ * This function may block for a few seconds until communication is
+ * established or timeout occurs.
+ *
  * @param tty device like "/dev/ttyACM0"
  * @return
  * - pointer to internal library data

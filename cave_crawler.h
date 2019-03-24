@@ -58,10 +58,20 @@ struct cc_odometry_data
 	float qz; //!< orientation quaternion z
 };
 
-/***
-	* @brief the size of RPLidar internal data
-	*/
-enum {RPLidarPacketDataSize=132};
+// type definition from RPLidarSDK
+typedef struct rplidar_response_ultra_cabin_nodes_t {
+    // 31                                              0
+    // | predict2 10bit | predict1 10bit | major 12bit |
+    uint32_t combined_x3;
+} __attribute__((packed)) rplidar_response_ultra_cabin_nodes_t;
+
+// type definition from RPLidar SDK
+typedef struct _rplidar_response_ultra_capsule_measurement_nodes_t {
+    uint8_t                             s_checksum_1; // see [s_checksum_1]
+    uint8_t                             s_checksum_2; // see [s_checksum_1]
+    uint16_t                            start_angle_sync_q6;
+    rplidar_response_ultra_cabin_nodes_t  ultra_cabins[32];
+} __attribute__((packed)) rplidar_response_ultra_capsule_measurement_nodes_t;
 
 /**
  * @struct cc_rplidar_data
@@ -72,7 +82,7 @@ struct cc_rplidar_data
 {
 	uint32_t timestamp_us; //!< microseconds elapsed since MCU was plugged in
 	uint8_t sequence;		 //!< 0-255, wrap-around for checking if packets are consecutive
-	uint8_t data[RPLidarPacketDataSize]; //!< raw rplidar_response_ultra_capsule_measurement_nodes_t
+	rplidar_response_ultra_capsule_measurement_nodes_t capsule; //!< type from RPLidarSDK
 };
 
 /**

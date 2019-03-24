@@ -441,7 +441,7 @@ static void decode_message_rplidar(uint8_t *msg, struct cc_rplidar_data *data)
 
 	data->sequence = payload[4];
 
-	memcpy(data->data, payload+5, RPLidarPacketDataSize);
+	memcpy( &data->capsule, payload+5, sizeof(rplidar_response_ultra_capsule_measurement_nodes_t) );
 }
 
 /*

@@ -37,6 +37,15 @@ cmake
 make
 ```
 
+## Udev Rules
+
+For Teensy add udev rule:
+
+```bash
+wget https://www.pjrc.com/teensy/49-teensy.rules
+sudo mv 49-teensy.rules /etc/udev/rules.d/
+```
+
 ## Testing
 
 Plug [cave-crawler-mcu]((https://github.com/bmegli/cave-crawler-mcu)) and run `cc-read-all` with your device, e.g.: 

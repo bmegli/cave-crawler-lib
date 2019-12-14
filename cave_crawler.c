@@ -59,14 +59,14 @@ Preliminary
 | ------------|--------|---------------|-----------------------------------------|
 |  ODOMETRY   | 0x01   |      28       |  encoders and IMU quaternions           |
 |  XV11LIDAR  | 0x02   |      15       |  lidar data                             |
-|  RPLIDARA3  | 0x03   |     137       |  compressed ultra capsules, sequence    |
+|  RPLIDARA3  | 0x03   |     138       |  compressed ultra capsules, sequence    |
 
 */
 
 // types
 enum {CC_ODOMETRY_TYPE=0x01, CC_XV11LIDAR_TYPE=0x02, CC_RPLIDAR_TYPE=0x03};
 // sizes
-enum {CC_ODOMETRY_SIZE=28+4, CC_XV11LIDAR_SIZE=15+4, CC_RPLIDAR_SIZE=137+4}; //to remove +4?
+enum {CC_ODOMETRY_SIZE=28+4, CC_XV11LIDAR_SIZE=15+4, CC_RPLIDAR_SIZE=138+4};
 enum {CC_NON_PAYLOAD_SIZE=4}; //TO DELETE?
 
 
@@ -421,12 +421,13 @@ static void decode_message_odometry(uint8_t *msg, struct cc_odometry_data *data)
 /*
 ### RPLIDARA3
 
-|          | Timestamp | Sequence | Data               |
-| ---------|-------- --|----------|--------------------|
-|   bytes  |     4     |    1     |  132               |
-|   type   |   uint32  |  uint8   | ultra_capsules     |
-|   unit   |    us     |  counts  | RPLidarA3 internal |
+|          | Timestamp | Device ID | Sequence | Data               |
+| ---------|-------- --|-----------|----------|--------------------|
+|   bytes  |     4     |     1     |    1     |  132               |
+|   type   |  uint32   |  uint8    |  uint8   | ultra_capsules     |
+|   unit   |    us     |    ID     | counts   | RPLidarA3 internal |
 
+- device ID identifies lidar when using multiple lidars
 - data is not decoded on MCU due to complexity
 - sequence if for checking if data angles follow one another
 - data corresponds to [rplidar_response_ultra_capsule_measurement_nodes_t](https://github.com/Slamtec/rplidar_sdk/blob/8291e232af614842447a634b6dbd725b81f24713/sdk/sdk/include/rplidar_cmd.h#L197) in [rplidar_sdk](https://github.com/Slamtec/rplidar_sdk)
@@ -438,10 +439,10 @@ static void decode_message_rplidar(uint8_t *msg, struct cc_rplidar_data *data)
 	uint8_t *payload=msg+CC_MSG_PAYLOAD_OFFSET;
 
 	data->timestamp_us = decode_uint32(payload);
+	data->device_id = payload[4];
+	data->sequence = payload[5];
 
-	data->sequence = payload[4];
-
-	memcpy( &data->capsule, payload+5, sizeof(rplidar_response_ultra_capsule_measurement_nodes_t) );
+	memcpy( &data->capsule, payload+6, sizeof(rplidar_response_ultra_capsule_measurement_nodes_t) );
 }
 
 /*

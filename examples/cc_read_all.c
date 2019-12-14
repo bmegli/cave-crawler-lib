@@ -78,8 +78,8 @@ int main(int argc, char **argv)
 			data.odometry[i].qx, data.odometry[i].qy, data.odometry[i].qz);
 
 		for(int i=0;i<data.size.rplidar;++i)
-			printf("[rp ] t=%u seq=%d\n",
-			data.rplidar[i].timestamp_us, data.rplidar[i].sequence);
+			printf("[rp ] t=%u id=%d seq=%d\n",
+			data.rplidar[i].timestamp_us, data.rplidar[i].device_id, data.rplidar[i].sequence);
 
 		for(int i=0;i<data.size.xv11lidar;++i)
 			printf("[xv11] t=%u aq=%d s=%d d=?\n", data.xv11lidar[i].timestamp_us,

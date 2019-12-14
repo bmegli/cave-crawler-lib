@@ -81,7 +81,8 @@ typedef struct _rplidar_response_ultra_capsule_measurement_nodes_t {
 struct cc_rplidar_data
 {
 	uint32_t timestamp_us; //!< microseconds elapsed since MCU was plugged in
-	uint8_t sequence;		 //!< 0-255, wrap-around for checking if packets are consecutive
+	uint8_t device_id; //!< identifies device when using multiple lidars
+	uint8_t sequence; //!< 0-255, wrap-around for checking if packets are consecutive
 	rplidar_response_ultra_capsule_measurement_nodes_t capsule; //!< type from RPLidarSDK
 };
 
